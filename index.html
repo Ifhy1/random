@@ -3,25 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Magic Orbit Planet</title>
+  <title>Mood Planet Fixed</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="theme-switcher">
     <button onclick="setTheme('magic')">✨ Magic</button>
     <button onclick="setTheme('love')">💖 Love</button>
-    <button onclick="setTheme('space')">🌌 Space</button>
+    <button onclick="setTheme('planet')">🌍 Planets</button>
+    <button onclick="setTheme('feelgood')">🌈 Feel Good</button>
   </div>
 
   <div class="planet-container">
-    <div class="planet" id="planet"></div>
-    <div class="orbit" id="orbit">
-      <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="star" /></div>
-      <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="heart" /></div>
-      <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="star" /></div>
-      <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png" alt="moon" /></div>
-      <div class="item"><img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="cloud" /></div>
-    </div>
+    <div class="planet"></div>
+    <div class="orbit" id="orbit"></div>
   </div>
 
   <script src="script.js"></script>
