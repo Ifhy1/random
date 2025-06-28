@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Georgia', sans-serif;
   overflow: hidden;
   height: 100vh;
   display: flex;
@@ -39,29 +39,36 @@ body {
 
 .planet-container {
   position: relative;
-  width: 250px;
-  height: 250px;
-  perspective: 800px;
+  width: 320px;
+  height: 320px;
 }
 
-.planet {
-  width: 120px;
-  height: 120px;
+.planet-center {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #4fc3f7, #0d47a1);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-  animation: spinPlanet 18s linear infinite;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+  animation: spinCenter 25s linear infinite;
   margin: 0 auto;
   z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
 }
 
 .orbit {
   position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  top: 0;
+  left: 0;
   animation: spinOrbit 30s linear infinite;
 }
 
@@ -71,56 +78,61 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 60px;
+  width: 70px;
+  transform: rotate(0deg); /* cancel orbit rotation */
 }
 
 .item img {
   width: 48px;
   height: 48px;
   object-fit: contain;
-  transition: transform 0.3s ease;
 }
 
-.item span, .label {
+.label {
   font-size: 12px;
-  margin-top: 6px;
   color: #ddd;
+  margin-top: 5px;
 }
 
-.item img:hover,
-.item span:hover {
-  transform: scale(1.2);
-}
-
-@keyframes spinPlanet {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+/* Animations */
+@keyframes spinCenter {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes spinOrbit {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Mobile Responsive */
 @media (max-width: 600px) {
   .planet-container {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
   }
-  .planet {
-    width: 90px;
-    height: 90px;
+
+  .planet-center {
+    width: 110px;
+    height: 110px;
+    font-size: 26px;
   }
+
   .orbit {
-    width: 220px;
-    height: 220px;
+    width: 260px;
+    height: 260px;
   }
+
+  .item {
+    width: 60px;
+  }
+
   .item img {
     width: 36px;
     height: 36px;
   }
-  .item span, .label {
-    font-size: 11px;
+
+  .label {
+    font-size: 16px;
   }
 }

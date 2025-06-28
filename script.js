@@ -1,28 +1,32 @@
 const orbit = document.getElementById("orbit");
 const body = document.body;
+const centerIcon = document.getElementById("center-icon");
 
 const themes = {
   magic: {
+    icon: "🔮",
     items: [
-      { src: "https://cdn-icons-png.flaticon.com/512/616/616408.png", label: "Star" },
-      { src: "https://cdn-icons-png.flaticon.com/512/7993/7993907.png", label: "Wand" },
-      { src: "https://cdn-icons-png.flaticon.com/512/1055/1055646.png", label: "Moon" },
+      { src: "https://cdn-icons-png.flaticon.com/512/616/616408.png", label: "Puppy" },
+      { src: "https://cdn-icons-png.flaticon.com/512/1055/1055646.png", label: "Space" },
+      { src: "https://cdn-icons-png.flaticon.com/512/5323/5323944.png", label: "Potion" },
       { src: "https://cdn-icons-png.flaticon.com/512/5333/5333040.png", label: "Crystal" },
-      { src: "https://cdn-icons-png.flaticon.com/512/7641/7641727.png", label: "Spellbook" }
+      { src: "https://cdn-icons-png.flaticon.com/512/11899/11899007.png", label: "Spellbook" }
     ],
-    background: "linear-gradient(145deg, #2e0066, #120033)"
+    background: "radial-gradient(circle at 30% 30%, #1a0142, #050018)"
   },
   love: {
+    icon: "💖",
     items: [
       { src: "https://cdn-icons-png.flaticon.com/512/833/833472.png", label: "Heart" },
       { src: "https://cdn-icons-png.flaticon.com/512/2589/2589175.png", label: "Rose" },
-      { src: "https://cdn-icons-png.flaticon.com/512/254/254062.png", label: "Cupid" },
-      { src: "https://cdn-icons-png.flaticon.com/512/747/747376.png", label: "Gift" },
-      { src: "https://cdn-icons-png.flaticon.com/512/929/929564.png", label: "Letter" }
+      { src: "https://cdn-icons-png.flaticon.com/512/3601/3601573.png", label: "Love Letter" },
+      { src: "https://cdn-icons-png.flaticon.com/512/7641/7641726.png", label: "Kiss" },
+      { src: "https://cdn-icons-png.flaticon.com/512/929/929564.png", label: "Hug" }
     ],
-    background: "linear-gradient(145deg, #ffafbd, #ffc3a0)"
+    background: "linear-gradient(145deg, #ff9a9e, #fad0c4)"
   },
   planet: {
+    icon: "🪐",
     items: [
       { src: "https://cdn-icons-png.flaticon.com/512/427/427735.png", label: "Mercury" },
       { src: "https://cdn-icons-png.flaticon.com/512/427/427734.png", label: "Venus" },
@@ -30,28 +34,30 @@ const themes = {
       { src: "https://cdn-icons-png.flaticon.com/512/427/427731.png", label: "Mars" },
       { src: "https://cdn-icons-png.flaticon.com/512/427/427730.png", label: "Jupiter" }
     ],
-    background: "radial-gradient(circle, #0a0a2a, #000)"
+    background: "radial-gradient(circle at center, #0d1b2a, #000000)"
   },
   feelgood: {
+    icon: "💫", 
     items: [
-      { label: "You’re doing great!" },
-      { label: "You are enough 🌈" },
-      { label: "Breathe. You got this." },
-      { label: "Shine in your own way ✨" },
-      { label: "Joy lives in little things 💛" }
+      { label: "Joy lives in little things sometimes🌟" },
+      { label: "Keep glowing ✨" },
+      { label: "You got this 💪" },
+      { label: "Shine today 💖" },
+      { label: "Smile more 😊" }
     ],
-    background: "linear-gradient(135deg, #f9d423, #ff4e50)"
+    background: "linear-gradient(135deg, #1f4037, #99f2c8)"
   }
 };
 
 function setTheme(themeName) {
   orbit.innerHTML = "";
-  const { items, background } = themes[themeName];
+  const { items, background, icon } = themes[themeName];
   body.style.background = background;
+  centerIcon.textContent = icon;
 
-  const radius = 120;
-  const cx = 150;
-  const cy = 150;
+  const radius = 140;
+  const cx = 160;
+  const cy = 160;
 
   items.forEach((item, i) => {
     const angle = (2 * Math.PI / items.length) * i;
@@ -73,6 +79,7 @@ function setTheme(themeName) {
       el.appendChild(label);
     } else {
       const span = document.createElement("span");
+      span.className = "label";
       span.textContent = item.label;
       el.appendChild(span);
     }
@@ -81,4 +88,5 @@ function setTheme(themeName) {
   });
 }
 
+// Default load
 setTheme("magic");
