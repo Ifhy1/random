@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at center, #0f0f0f, #000);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  z-index: 10;
+}
+
+.theme-switcher button {
+  margin: 0 5px;
+  padding: 8px 14px;
+  background: #ffffff20;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.theme-switcher button:hover {
+  background: #ffffff40;
+}
+
+.planet-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  perspective: 800px;
+}
+
+.planet {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #4fc3f7, #0d47a1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  animation: spinPlanet 18s linear infinite;
+  margin: 0 auto;
+}
+
+.orbit {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spinOrbit 25s linear infinite;
+}
+
+.item {
+  position: absolute;
+  animation: floatTag 3s ease-in-out infinite alternate;
+}
+
+.item:nth-child(1) { top: 0%; left: 50%; transform: translateX(-50%); }
+.item:nth-child(2) { top: 50%; left: 100%; transform: translateY(-50%); }
+.item:nth-child(3) { bottom: 0%; left: 50%; transform: translateX(-50%); }
+.item:nth-child(4) { top: 50%; left: 0%; transform: translateY(-50%); }
+.item:nth-child(5) { top: 10%; left: 10%; }
+
+.item img {
+  width: 35px;
+  transition: transform 0.3s;
+}
+
+.item img:hover {
+  transform: scale(1.4);
+}
+
+@keyframes spinPlanet {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+@keyframes spinOrbit {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes floatTag {
+  from { transform: scale(1); opacity: 0.7; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+/* Themes */
+body.magic { background: radial-gradient(circle at center, #0e0e20, #1e0033); }
+body.love { background: radial-gradient(circle, #300020, #1a0012); }
+body.space { background: radial-gradient(circle, #01010f, #000000); }
