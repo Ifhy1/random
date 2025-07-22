@@ -1,92 +1,87 @@
-const orbit = document.getElementById("orbit");
-const body = document.body;
-const centerIcon = document.getElementById("center-icon");
-
-const themes = {
-  magic: {
-    icon: "🔮",
-    items: [
-      { src: "https://cdn-icons-png.flaticon.com/512/616/616408.png", label: "Puppy" },
-      { src: "https://cdn-icons-png.flaticon.com/512/1055/1055646.png", label: "Space" },
-      { src: "https://cdn-icons-png.flaticon.com/512/5323/5323944.png", label: "Potion" },
-      { src: "https://cdn-icons-png.flaticon.com/512/5333/5333040.png", label: "Crystal" },
-      { src: "https://cdn-icons-png.flaticon.com/512/11899/11899007.png", label: "Spellbook" }
-    ],
-    background: "radial-gradient(circle at 30% 30%, #1a0142, #050018)"
+const meals = [
+  {
+    day: "Monday",
+    breakfast: "Yam & egg sauce + pap",
+    lunch: "White rice with peppered goat meat & ugu",
+    dinner: "Ogbono soup with fufu",
+    snack: "Puff puff & tiger nuts",
+    water: "3–4L throughout the day"
   },
-  love: {
-    icon: "💖",
-    items: [
-      { src: "https://cdn-icons-png.flaticon.com/512/833/833472.png", label: "Heart" },
-      { src: "https://cdn-icons-png.flaticon.com/512/2589/2589175.png", label: "Rose" },
-      { src: "https://cdn-icons-png.flaticon.com/512/3601/3601573.png", label: "Love Letter" },
-      { src: "https://cdn-icons-png.flaticon.com/512/7641/7641726.png", label: "Kiss" },
-      { src: "https://cdn-icons-png.flaticon.com/512/929/929564.png", label: "Hug" }
-    ],
-    background: "linear-gradient(145deg, #ff9a9e, #fad0c4)"
+  {
+    day: "Tuesday",
+    breakfast: "Akara & custard",
+    lunch: "Fried rice with grilled chicken & coleslaw",
+    dinner: "Eba & okra soup with ponmo",
+    snack: "Chin chin & zobo",
+    water: "Hydrate every hour"
   },
-  planet: {
-    icon: "🪐",
-    items: [
-      { src: "https://cdn-icons-png.flaticon.com/512/427/427735.png", label: "Mercury" },
-      { src: "https://cdn-icons-png.flaticon.com/512/427/427734.png", label: "Venus" },
-      { src: "https://cdn-icons-png.flaticon.com/512/427/427733.png", label: "Earth" },
-      { src: "https://cdn-icons-png.flaticon.com/512/427/427731.png", label: "Mars" },
-      { src: "https://cdn-icons-png.flaticon.com/512/427/427730.png", label: "Jupiter" }
-    ],
-    background: "radial-gradient(circle at center, #0d1b2a, #000000)"
+  {
+    day: "Wednesday",
+    breakfast: "Plantain & scrambled eggs with bread",
+    lunch: "Jollof rice with turkey & steamed veggies",
+    dinner: "Amala & ewedu with light stew",
+    snack: "Boiled corn & coconut",
+    water: "3L minimum"
   },
-  feelgood: {
-    icon: "💫", 
-    items: [
-      { label: "Joy lives in little things sometimes🌟" },
-      { label: "Keep glowing ✨" },
-      { label: "You got this 💪" },
-      { label: "Shine today 💖" },
-      { label: "Smile more 😊" }
-    ],
-    background: "linear-gradient(135deg, #1f4037, #99f2c8)"
+  {
+    day: "Thursday",
+    breakfast: "Moi moi & custard",
+    lunch: "Ofada rice & ayamase sauce",
+    dinner: "Yam porridge with ugu and smoked fish",
+    snack: "Banana & cashew nuts",
+    water: "Drink before and after meals"
+  },
+  {
+    day: "Friday",
+    breakfast: "Nkwobi or pepper soup & agidi",
+    lunch: "Egusi soup with semo and grilled chicken",
+    dinner: "Beans & dodo + boiled egg",
+    snack: "Fruit mix (pawpaw, watermelon, cucumber)",
+    water: "3.5L total"
+  },
+  {
+    day: "Saturday",
+    breakfast: "Akamu & fried yam with sauce",
+    lunch: "Spaghetti jollof with turkey",
+    dinner: "Fufu & oha soup",
+    snack: "Donkwa & coconut water",
+    water: "Frequent hydration"
+  },
+  {
+    day: "Sunday",
+    breakfast: "White rice & vegetable stew + 2 eggs",
+    lunch: "Pounded yam & bitterleaf soup with beef",
+    dinner: "Noodles & plantain",
+    snack: "Tiger nuts & banana",
+    water: "Sip water all day"
   }
-};
+];
 
-function setTheme(themeName) {
-  orbit.innerHTML = "";
-  const { items, background, icon } = themes[themeName];
-  body.style.background = background;
-  centerIcon.textContent = icon;
+const dayContainer = document.querySelector('.day-buttons');
+const mealBtns = document.querySelector('.meal-buttons');
+const mealDetails = document.getElementById('mealDetails');
+const dayTitle = document.getElementById('day-title');
 
-  const radius = 140;
-  const cx = 160;
-  const cy = 160;
+meals.forEach((item, index) => {
+  const btn = document.createElement('button');
+  btn.innerText = item.day;
+  btn.addEventListener('click', () => showMeals(index));
+  dayContainer.appendChild(btn);
+});
 
-  items.forEach((item, i) => {
-    const angle = (2 * Math.PI / items.length) * i;
-    const x = cx + radius * Math.cos(angle) - 30;
-    const y = cy + radius * Math.sin(angle) - 30;
+function showMeals(index) {
+  const day = meals[index];
+  dayTitle.textContent = `🍴 ${day.day}'s Meal Plan`;
 
-    const el = document.createElement("div");
-    el.className = "item";
-    el.style.left = `${x}px`;
-    el.style.top = `${y}px`;
+  mealBtns.innerHTML = '';
+  mealDetails.innerHTML = '';
 
-    if (item.src) {
-      const img = document.createElement("img");
-      img.src = item.src;
-      const label = document.createElement("div");
-      label.className = "label";
-      label.textContent = item.label;
-      el.appendChild(img);
-      el.appendChild(label);
-    } else {
-      const span = document.createElement("span");
-      span.className = "label";
-      span.textContent = item.label;
-      el.appendChild(span);
-    }
-
-    orbit.appendChild(el);
+  ['breakfast', 'lunch', 'dinner', 'snack', 'water'].forEach(type => {
+    const btn = document.createElement('button');
+    btn.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+    btn.onclick = () => {
+      mealDetails.innerHTML = `<strong>${type.toUpperCase()}</strong>: ${day[type]}`;
+    };
+    mealBtns.appendChild(btn);
   });
 }
-
-// Default load
-setTheme("magic");
